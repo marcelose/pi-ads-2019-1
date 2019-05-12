@@ -22,7 +22,8 @@ router.get('/ultimas', function (req, res, next) {
 
   }).finally(() => {
     banco.sql.close();
-  })
+  });
+  
 });
 
 module.exports = router;

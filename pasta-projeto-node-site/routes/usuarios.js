@@ -18,14 +18,14 @@ router.post('/entrar', function (req, res, next) {
     }
 
   }).catch(err => {
-    
+
     var erro = `Erro no login: ${err}`;
     console.error(erro);
     res.sendStatus(500).send(erro);
 
   }).finally(() => {
     banco.sql.close();
-  })
+  });
 
 });
 
