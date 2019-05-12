@@ -1,6 +1,5 @@
 // executar os comandos (pelo git bash ou powershell):
 // npm i serialport
-// npm i tedious
 // npm i events
 // npm i mssql
 
