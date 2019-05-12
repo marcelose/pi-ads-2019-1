@@ -1,12 +1,11 @@
 // executar os comandos (pelo git bash ou powershell):
-// npm i serialport
-// npm i events
-// npm i mssql
+// npm i
+// npm start
 
 // leitura dos dados do Arduino
 var porta_serial = require('serialport');
 var leitura_recebida = porta_serial.parsers.Readline;
-var banco = require('./app-banco');
+var banco = require('../pasta-projeto-node-site/app-banco');
 
 // prevenir problemas com muitos recebimentos de dados do Arduino
 require('events').EventEmitter.defaultMaxListeners = 15;
