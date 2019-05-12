@@ -2,10 +2,13 @@
 // npm i
 // npm start
 
+// qual o nome da pasta onde está o node do site?
+var pasta_projeto_site = 'pasta-projeto-node-site';
+
 // leitura dos dados do Arduino
 var porta_serial = require('serialport');
 var leitura_recebida = porta_serial.parsers.Readline;
-var banco = require('../pasta-projeto-node-site/app-banco');
+var banco = require(`../${pasta_projeto_site}/app-banco`);
 
 // prevenir problemas com muitos recebimentos de dados do Arduino
 require('events').EventEmitter.defaultMaxListeners = 15;
@@ -88,10 +91,6 @@ function registrar_leitura(temperatura, umidade) {
 
         return banco.sql.query(`INSERT into leitura (temperatura, umidade, momento)
                                 values (${temperatura}, ${umidade}, CURRENT_TIMESTAMP);`);
-
-    }).then(resultado => {
-
-        console.log(`Linhas inseridas: ${resultado.rowsAffected}`);
 
     }).catch(err => {
 
