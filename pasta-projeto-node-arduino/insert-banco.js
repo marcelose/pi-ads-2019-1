@@ -109,4 +109,4 @@ function registrar_leitura(temperatura, umidade) {
 var efetuando_insert = false;
 
 // iniciando a "escuta" de dispositivos Arduino
-iniciarEscuta();
+iniciar_escuta();
