@@ -2,24 +2,31 @@ var express = require('express');
 var router = express.Router();
 var banco = require('../app-banco');
 
-router.get('/teste', function (req, res, next) {
-  res.send('banco ' + banco.configuracoes.server);
-});
+router.post('/entrar', function (req, res, next) {
 
-router.get('/entrar', function (req, res, next) {
-  console.log(banco.conexao);
   banco.conectar().then(() => {
-    return banco.sql.query `select top 3 * from leitura where id <= 10`;
+    var login = req.body.login;
+    var senha = req.body.senha;
+    return banco.sql.query(`select * from usuario where login='${login}' and senha='${senha}'`);
   }).then(consulta => {
-    console.log(consulta.recordset);
-    res.send(consulta.recordset);
+
+    if (consulta.recordset.length==1) {
+      res.send(consulta.recordset);
+    } else {
+      console.log(`Usuários encontrados: ${consulta.recordset.length}`);
+      res.sendStatus(404);
+    }
+
   }).catch(err => {
+    
     var erro = `Erro no login: ${err}`;
     console.error(erro);
-    res.status(500).send(erro);
+    res.sendStatus(500).send(erro);
+
   }).finally(() => {
     banco.sql.close();
   })
+
 });
 
 module.exports = router;
