@@ -7,7 +7,10 @@ router.get('/ultimas', function (req, res, next) {
   banco.conectar().then(() => {
     var limite_linhas = 5;
     return banco.sql.query(`select top ${limite_linhas} 
-                            Id, temperatura, umidade, FORMAT(momento,'HH:mm:ss') as momento 
+                            Id as id_nome_loko, 
+                            temperatura as temp, 
+                            umidade, 
+                            FORMAT(momento,'HH:mm:ss') as momento 
                             from leitura order by id desc`);
   }).then(consulta => {
 
@@ -23,7 +26,7 @@ router.get('/ultimas', function (req, res, next) {
   }).finally(() => {
     banco.sql.close();
   });
-  
+
 });
 
 module.exports = router;
