@@ -12,7 +12,8 @@ var configuracoes = {
         pool: {
             max: 4,
             min: 1,
-            idleTimeoutMillis: 30000
+            idleTimeoutMillis: 30000,
+            connectionTimeout: 5000
         }
     },
     desenvolvimento: {
